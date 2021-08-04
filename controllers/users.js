@@ -1,31 +1,18 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
-const { v4: uuidv4 } = require('uuid');
-const S3 = require('aws-sdk/clients/s3');
-const s3 = new S3(); // initialize the construcotr
-// now s3 can crud on our s3 buckets
+
 
 module.exports = {
   signup,
-  login
+  login,
+  profile
 };
 
-function signup(req, res) {
-  console.log(req.body, req.file)
-
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////
-
-  // FilePath unique name to be saved to our butckt
-  const filePath = `${uuidv4()}/${req.file.originalname}`
-  const params = {Bucket: process.env.BUCKET_NAME, Key: filePath, Body: req.file.buffer};
-  //your bucket name goes where collectorcat is 
-  //////////////////////////////////////////////////////////////////////////////////
-  s3.upload(params, async function(err, data){
-    console.log(data, 'from aws') // data.Location is our photoUrl that exists on aws
-    const user = new User({...req.body, photoUrl: data.Location});
+async function signup(req, res) {
+  console.log(req.body , "<--- this")
+  
+  const user = new User(req.body);
     try {
       await user.save();
       const token = createJWT(user); // user is the payload so this is the object in our jwt
@@ -34,13 +21,7 @@ function signup(req, res) {
       // Probably a duplicate email
       res.status(400).json(err);
     }
-
-
-
-  })
-  //////////////////////////////////////////////////////////////////////////////////
- 
-}
+  }
 
 async function login(req, res) {
   try {
@@ -59,6 +40,19 @@ async function login(req, res) {
     });
   } catch (err) {
     return res.status(401).json(err);
+  }
+}
+
+async function profile(req, res) {
+  try {
+    const user = await User.findOne({username: req.params.username})
+
+    if(!user) res.status(404).json({message: 'bad parameters'})
+    
+    const cities = await City.find({user: user._id})
+  } catch(err) {
+    console.log(err)
+    res.json({err})
   }
 }
 
