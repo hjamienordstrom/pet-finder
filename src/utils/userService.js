@@ -58,5 +58,5 @@ export default {
   signup, 
   login,
   getUser,
-  // getProfile,
+  getProfile,
 };

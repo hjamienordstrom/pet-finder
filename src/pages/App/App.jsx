@@ -4,6 +4,9 @@ import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService'
+import AddPet from '../AddPet/AddPet';
+import Pets from '../Pets/Pets';
+import Show from '../Show/Show';
 
 
 function App() {
@@ -34,7 +37,13 @@ function App() {
             <> 
              <Switch>
                 <Route exact path="/">
-                    Home PAGE COMPONENT WOULD GO HEREE
+                    <Pets user={user} />
+                </Route>
+                <Route exact path="/addpet">
+                    <AddPet />
+                    </Route>
+                    <Route path="/pet/:id">
+                    <Show user={user} />
                 </Route>
             </Switch>
             </>
