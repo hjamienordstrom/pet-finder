@@ -20,12 +20,19 @@ function getOne(id){
         method: 'GET',
         headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
     }).then(res => res.json())
-    }
+}
 
-
+function deletePet(id){
+    console.log(id)
+    return fetch(BASE_URL + 'delete/' + id,{
+        method:'DELETE',   
+        headers: {'Authorization': 'Bearer ' + tokenService.getToken()}
+    }).then(res=> res.json())
+}
 
 export default{
     addPet,
     getAllPets,
-    getOne
+    getOne,
+    deletePet
 }

@@ -7,13 +7,11 @@ const user = require('../models/user');
 const s3 = new S3()
 const BUCKET_NAME = process.env.BUCKET_NAME;
 
-
-
-
 module.exports={
     addPet,
     getAll,
-    getOne
+    getOne, 
+    deletePet
 }
 
 async function addPet(req, res) {
@@ -57,3 +55,9 @@ async function addPet(req, res) {
       const petCreator = await User.findById(pet.user)
       res.status(200).json({pet:pet, author:petCreator})
   }
+
+async function deletePet(req,res){
+    console.log(req.params.id)
+    await Pet.findByIdAndDelete(req.params.id)
+    res.status(200).json('deleted pet')
+}
