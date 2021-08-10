@@ -11,7 +11,8 @@ module.exports={
     addPet,
     getAll,
     getOne, 
-    deletePet
+    deletePet,
+    editPet
 }
 
 async function addPet(req, res) {
@@ -60,4 +61,22 @@ async function deletePet(req,res){
     console.log(req.params.id)
     await Pet.findByIdAndDelete(req.params.id)
     res.status(200).json('deleted pet')
+}
+
+async function editPet(req, res){
+    console.log(req.body)
+    console.log('req.body of the editpet function is firing')
+    const pet = await Pet.findById({_id: req.params.id})
+    pet.name = req.body.name;
+    pet.birthday = req.body.birthday;
+    pet.color = req.body.color;
+    pet.sex = req.body.sex;
+
+    try {
+        await pet.save();
+        res.status(200).json('updated pet');
+    } catch (err) {
+        console.log(err)
+    }
+
 }

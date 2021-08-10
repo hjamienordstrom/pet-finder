@@ -7,6 +7,7 @@ const upload = multer();
 router.post('/addpet', upload.single('photo'), petsCtrl.addPet);
 router.get('/index', petsCtrl.getAll)
 router.get('/pet/:id', petsCtrl.getOne)
+router.put('/pet/:id', petsCtrl.editPet)
 router.delete('/delete/:id', petsCtrl.deletePet)
 
 /*---------- Protected Routes ----------*/

@@ -9,6 +9,7 @@ import Pets from '../Pets/Pets';
 import Show from '../Show/Show';
 
 
+
 function App() {
 
   const [user, setUser] = useState(userService.getUser()) // getUser decodes our JWT token, into a javascript object
@@ -45,6 +46,7 @@ function App() {
                     <Route path="/pet/:id">
                     <Show user={user} />
                 </Route>
+
             </Switch>
             </>
             :
