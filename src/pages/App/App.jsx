@@ -20,10 +20,10 @@ function App() {
     setUser(userService.getUser()) // getting the user from localstorage decoding the jwt
   }
 
-  // function handleLogout(){
-  //   userService.logout();
-  //   setUser({user: null})
-  // }
+  function handleLogout(){
+    userService.logout();
+    setUser({user: null})
+  }
 
   return (
     <div className="App">
@@ -38,13 +38,13 @@ function App() {
             <> 
              <Switch>
                 <Route exact path="/">
-                    <Pets user={user} />
+                    <Pets user={user} handleLogout={handleLogout}/>
                 </Route>
                 <Route exact path="/addpet">
                     <AddPet />
                     </Route>
                     <Route path="/pet/:id">
-                    <Show user={user} />
+                    <Show user={user}  handleLogout={handleLogout}/>
                 </Route>
 
             </Switch>

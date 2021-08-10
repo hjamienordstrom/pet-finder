@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card, Grid, Loader } from 'semantic-ui-react'
-import { useParams,useHistory, Link } from 'react-router-dom'
-import petService from '../../utils/petService'
-import EditPet from '../EditPet/EditPet'
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Grid, Loader } from 'semantic-ui-react';
+import { useParams,useHistory, Link } from 'react-router-dom';
+import petService from '../../utils/petService';
+import EditPet from '../EditPet/EditPet';
+import NavBar from '../../components/NavBar/NavBar';
 
-export default function Show({ user }) {
+export default function Show({ user, handleLogout}) {
     const [loading, setLoading]=useState(true)
     const { id } = useParams()
     const [pet, setPet] = useState({})
@@ -43,6 +44,7 @@ export default function Show({ user }) {
 
     if (loading) {
         return (
+        <>
           <Grid
             textAlign="center"
             style={{ height: "65vh" }}
@@ -54,10 +56,15 @@ export default function Show({ user }) {
               </Loader>
             </Grid.Column>
           </Grid>
+        </>
         );
       } else {
     
+
+
     return (
+        <>
+        <NavBar handleLogout={handleLogout}/>
         <Card centered>
             <Card>
                 {pet.pet.name}
@@ -77,6 +84,7 @@ export default function Show({ user }) {
                 ) : ( "" )
         }
         </Card>
+        </>
     )
 }
 }

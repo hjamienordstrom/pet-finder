@@ -53,10 +53,14 @@ function getProfile(username){
   })
 }
 
+function logout() {
+  tokenService.removeToken();
+}
 
 export default {
   signup, 
   login,
   getUser,
   getProfile,
+  logout
 };
