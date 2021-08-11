@@ -30,9 +30,9 @@ export default function Pets({ user , handleLogout}) {
                     return (
                         <Card>
                         <Link to={'pet/' + pet._id}>
-                        <Card>
+                        <Card style={{color:'black'}}>
                             {pet.name}
-                            <Card.Content>
+                            <Card.Content style={{color:'black'}}>
                                 color: {pet.color}
                                 <br />
                                 birthday: {pet.birthday}
