@@ -2,7 +2,10 @@ Pet Finder
 
 The purpose of this application is to connect pet rescues and potential adopters in order to find a home for the pet. Adopters can view various pets and choose which one they feel will fit them the best based on their personality, color, sex, etc. They can then inquire about the pet directly with the rescue. 
 
-
+<img src="photos/homepage.png" width="350" height="250">
+<img src="photos/addpet.png" width="350" height="250">
+<img src="photos/login.png" width="350" height="250">
+<img src="photos/signup.png" width="350" height="250">
 
 Technologies Used
 
